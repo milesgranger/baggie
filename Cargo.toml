@@ -3,5 +3,13 @@ name = "baggie"
 version = "0.1.0"
 authors = ["Miles Granger <miles59923@gmail.com>"]
 edition = "2018"
+description = "Container for storing mixed / heterogeneous values in a common structure"
+readme = "README.md"
+keywords = ["heterogeneous", "bag", "collection", "hashmap"]
+homepage = "https://github.com/milesgranger/baggie"
+repository = "https://github.com/milesgranger/baggie"
+license = "MIT"
+exclude = ["/.gitignore", ".travis.yml", ".cargo/config"]
+documentation = "https://docs.rs/crate/baggie/"
 
 [dependencies]
