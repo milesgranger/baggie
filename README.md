@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.com/milesgranger/baggie.svg?branch=master)](https://travis-ci.com/milesgranger/baggie)
 [![crates.io](http://meritbadge.herokuapp.com/baggie)](https://crates.io/crates/baggie)
+[![Coverage Status](https://coveralls.io/repos/github/milesgranger/baggie/badge.svg?branch=master)](https://coveralls.io/github/milesgranger/baggie?branch=master)
 
 `Baggie` is simple interface for storing any type of element in a `HashMap`. 
 The crate has no dependencies, and is really just a helper around storing and 
