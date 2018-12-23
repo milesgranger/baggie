@@ -1,6 +1,6 @@
 [package]
 name = "baggie"
-version = "0.1.0-a1"
+version = "0.1.0"
 authors = ["Miles Granger <miles59923@gmail.com>"]
 edition = "2018"
 
