@@ -44,6 +44,9 @@ fn test_baggie_get() {
     // clear()
     bag.clear();
     assert!(bag.is_empty());
+
+    // debug
+    println!("{:?}", &bag);
 }
 
 

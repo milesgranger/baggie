@@ -5,7 +5,7 @@ use std::borrow::Borrow;
 
 
 /// struct for collecting values of any type with a string key
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct Baggie<K>
     where K: Eq + Hash
 {
