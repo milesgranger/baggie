@@ -17,7 +17,7 @@ The downside of this crate is you must know the type of what you stored later on
 Typically this shouldn't be a problem, as you could keep some metadata structure 
 describing what types belong to what keys you've stored.
 
-Sometimes you might need a tool like this, but most times you should be using an enum. :)
+_Sometimes_ you might need a tool like this, but _most times_ you should be using an enum. :)
 
 ```rust
 use baggie::Baggie;
