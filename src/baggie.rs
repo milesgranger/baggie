@@ -1,38 +1,50 @@
 use std::collections::{HashMap, hash_map::Keys};
 use std::any::Any;
+use std::hash::Hash;
+use std::borrow::Borrow;
 
 
 /// struct for collecting values of any type with a string key
 #[derive(Default)]
-pub struct Baggie {
-    data: HashMap<String, Box<Any>>
+pub struct Baggie<K>
+    where K: Eq + Hash
+{
+    data: HashMap<K, Box<Any>>
 }
 
-impl Baggie {
+impl<K> Baggie<K>
+    where K: Eq + Hash + Default
+{
 
     /// Initialize an empty `Baggie`
     pub fn new() -> Self {
-        Baggie::default()
+        Default::default()
     }
 
     /// Insert a value into the baggie.
-    pub fn insert<T: 'static>(&mut self, key: &str, value: T) {
+    pub fn insert<T: 'static>(&mut self, key: K, value: T) {
         let value = Box::new(value);
         self.data.insert(key.into(), value);
     }
 
     /// Get a reference to something in the baggie
-    pub fn get<T: 'static>(&self, key: &str) -> Option<&T> {
+    pub fn get<T: 'static, Q: ?Sized>(&self, key: &Q) -> Option<&T>
+        where K: Borrow<Q>,
+              Q: Eq + Hash
+    {
         self.data.get(key)?.downcast_ref::<T>()
     }
 
     /// Get a mutable reference to something in the baggie
-    pub fn get_mut<T: 'static>(&mut self, key: &str) -> Option<&mut T> {
+    pub fn get_mut<T: 'static, Q: ?Sized>(&mut self, key: &Q) -> Option<&mut T>
+        where K: Borrow<Q>,
+              Q: Eq + Hash
+    {
         self.data.get_mut(key)?.downcast_mut::<T>()
     }
 
     /// An iterator visiting all keys in arbitrary order.
-    pub fn keys(&self) -> Keys<'_, String, Box<dyn Any>> {
+    pub fn keys(&self) -> Keys<'_, K, Box<dyn Any>> {
         self.data.keys()
     }
 
@@ -52,13 +64,19 @@ impl Baggie {
     }
 
     /// Returns true if the map contains a value for the given key.
-    pub fn contains_key(&self, key: &str) -> bool {
+    pub fn contains_key<Q: ?Sized>(&self, key: &Q) -> bool
+        where K: Borrow<Q>,
+              Q: Eq + Hash
+    {
         self.data.contains_key(key)
     }
 
     /// Remove a key-value pair from the Baggie by key.
     /// if the key value pair existed, the raw [`Box<dyn Any>`] value will be returned
-    pub fn remove(&mut self, key: &str) -> Option<Box<dyn Any>> {
+    pub fn remove<Q: ?Sized>(&mut self, key: &Q) -> Option<Box<dyn Any>>
+        where K: Borrow<Q>,
+              Q: Eq + Hash
+    {
         self.data.remove(key)
     }
 

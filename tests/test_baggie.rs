@@ -13,22 +13,22 @@ fn test_baggie_get() {
     bag.insert("key2", vec!["value", "2"]);
     bag.insert("key3", 3);
 
-    let val = bag.get::<String>("key1");
+    let val: Option<&String> = bag.get("key1");
     assert_eq!(Some(&"Value1".to_owned()), val);
 
-    let val = bag.get::<Vec<&str>>("key2");
+    let val = bag.get::<Vec<&str>, _>("key2");
     assert_eq!(Some(&vec!["value", "2"]), val);
 
-    let val = bag.get::<i32>("key3");
+    let val = bag.get::<i32, _>("key3");
     assert_eq!(Some(&3), val);
 
     // Arbitrary tests...
     assert_eq!(bag.len(), 3);  // len
 
     // keys()
-    let mut keys = bag.keys().collect::<Vec<&String>>();
+    let mut keys = bag.keys().collect::<Vec<&&str>>();
     keys.sort();
-    assert_eq!(keys, vec!["key1", "key2", "key3"]);
+    assert_eq!(keys, vec![&"key1", &"key2", &"key3"]);
 
     // contains_key()
     assert!(!bag.contains_key("key-does-not-exist"));

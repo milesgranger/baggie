@@ -30,7 +30,7 @@ bag.insert("key2", vec!["value", "2"]);
 bag.insert("key3", 3);
 
 // Get a reference
-let val3 = bag.get::<i32>("key3");
+let val3 = bag.get::<i32, _>("key3");
 assert_eq!(Some(&3), val3);
 
 // Get a mutable reference
